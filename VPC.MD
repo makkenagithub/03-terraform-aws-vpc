@@ -76,3 +76,7 @@ We cant create servers without subnet. So we have to create
 2. 1 private (backend) subnet in us-east-1a , 1 private (backend) subnet in us-east-1b
 3. 1 private (DB) subnet in us-east-1a , 1 private (DB) subnet in us-east-1b
 
+The procedure for creating a VPC is same for any project. Hence its better to create a terraform module for VPC and reuse it.
+
+
+
