@@ -29,3 +29,67 @@ variable "vpc_tags" {
 
     }
 }
+
+#optional
+variable "igw_tags" {
+    default = {
+
+    }
+}
+
+#optional
+variable "public_subnet_tags" {
+    default = {
+
+    }
+}
+
+#optional
+variable "private_subnet_tags" {
+    default = {
+
+    }
+}
+
+#optional
+variable "database_subnet_tags" {
+    default = {
+
+    }
+}
+
+#restrict the user to give only 2 CIDRs for high availability 1a, 1b
+# we use size valdation here
+variable "public_subnet_cidrs" {
+    type = list
+
+    validation {
+        condition = length(var.public_subnet_cidrs) == 2
+        error_message = "Please provide two valid public subnet CIDRs"
+    }
+
+}
+
+#restrict the user to give only 2 CIDRs for high availability 1a, 1b
+# we use size valdation here
+variable "private_subnet_cidrs" {
+    type = list
+
+    validation {
+        condition = length(var.private_subnet_cidrs) == 2
+        error_message = "Please provide two valid private subnet CIDRs"
+    }
+
+}
+
+#restrict the user to give only 2 CIDRs for high availability 1a, 1b
+# we use size valdation here
+variable "database_subnet_cidrs" {
+    type = list
+
+    validation {
+        condition = length(var.database_subnet_cidrs) == 2
+        error_message = "Please provide two valid database subnet CIDRs"
+    }
+
+}
