@@ -58,6 +58,13 @@ variable "database_subnet_tags" {
     }
 }
 
+#optional
+variable "database_subnet_group_tags" {
+    default = {
+
+    }
+}
+
 #restrict the user to give only 2 CIDRs for high availability 1a, 1b
 # we use size valdation here
 variable "public_subnet_cidrs" {

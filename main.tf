@@ -32,6 +32,9 @@ resource "aws_subnet" "public" {
   cidr_block = var.public_subnet_cidrs[count.index]
   availability_zone = local.az_names[count.index]
 
+  # to assign a public IP for istances launched in this public subnet 
+  map_public_ip_on_launch = true
+
   tags = merge(
     var.common_tags,
     var.public_subnet_tags,
@@ -71,6 +74,20 @@ resource "aws_subnet" "database" {
     var.database_subnet_tags,
     {
         Name = "${local.resource_name}-database-${local.az_names[count.index]}"
+    }
+  )
+}
+
+# DB subnet group for RDS
+resource "aws_db_subnet_group" "default" {
+  name       = local.resource_name
+  subnet_ids = aws_subnet.database[*].id
+
+  tags = merge(
+    var.common_tags,
+    var.database_subnet_group_tags,
+    {
+        Name = local.resource_name
     }
   )
 }
