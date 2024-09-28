@@ -133,6 +133,7 @@ resource "aws_route_table" "public" {
     {
         Name = "${local.resource_name}-public"  #expense-dev-public
     }
+  )
 }
 
 # create private route table 
@@ -145,6 +146,7 @@ resource "aws_route_table" "private" {
     {
         Name = "${local.resource_name}-private"  #expense-dev-public
     }
+  )
 }
 
 # create database route table 
@@ -157,6 +159,7 @@ resource "aws_route_table" "database" {
     {
         Name = "${local.resource_name}-database"  #expense-dev-public
     }
+  )
 }
 
 # routes

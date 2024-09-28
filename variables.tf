@@ -93,6 +93,13 @@ variable "database_route_table_tags" {
     }
 }
 
+#optional
+variable "vpc_peering_tags" {
+    default = {
+
+    }
+}
+
 #restrict the user to give only 2 CIDRs for high availability 1a, 1b
 # we use size valdation here
 variable "public_subnet_cidrs" {
@@ -132,6 +139,6 @@ variable "database_subnet_cidrs" {
 variable "is_peering_required" {
     type = bool
     default = false
-    
+
 }
 
