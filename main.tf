@@ -115,3 +115,72 @@ resource "aws_nat_gateway" "main" {
   # on the Internet Gateway for the VPC.
   depends_on = [aws_internet_gateway.main]
 }
+
+
+# create public route table 
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+# we can add internet gateway route here also as below.
+  # route {
+  #   cidr_block = "10.0.1.0/24"
+  #   gateway_id = aws_internet_gateway.example.id
+  # }
+
+  tags = merge(
+    var.common_tags,
+    var.public_route_table_tags,
+    {
+        Name = "${local.resource_name}-public"  #expense-dev-public
+    }
+}
+
+# create private route table 
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+
+  tags = merge(
+    var.common_tags,
+    var.private_route_table_tags,
+    {
+        Name = "${local.resource_name}-private"  #expense-dev-public
+    }
+}
+
+# create database route table 
+resource "aws_route_table" "database" {
+  vpc_id = aws_vpc.main.id
+
+  tags = merge(
+    var.common_tags,
+    var.database_route_table_tags,
+    {
+        Name = "${local.resource_name}-database"  #expense-dev-public
+    }
+}
+
+# routes
+resource "aws_route" "public" {
+  route_table_id            = aws_route_table.public.id
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id  = aws_internet_gateway.main.id
+
+}
+
+# routes
+resource "aws_route" "private" {
+  route_table_id            = aws_route_table.private.id
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id  = aws_nat_gateway.main.id
+  
+}
+
+# routes
+resource "aws_route" "database" {
+  route_table_id            = aws_route_table.database.id
+  destination_cidr_block    = "0.0.0.0/0"
+  nat_gateway_id  = aws_nat_gateway.main.id
+  
+}
+
+#association of route tables with subnets

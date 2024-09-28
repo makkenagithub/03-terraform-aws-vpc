@@ -72,6 +72,27 @@ variable "nat_gateway_tags" {
     }
 }
 
+#optional
+variable "public_route_table_tags" {
+    default = {
+
+    }
+}
+
+#optional
+variable "private_route_table_tags" {
+    default = {
+
+    }
+}
+
+#optional
+variable "database_route_table_tags" {
+    default = {
+
+    }
+}
+
 #restrict the user to give only 2 CIDRs for high availability 1a, 1b
 # we use size valdation here
 variable "public_subnet_cidrs" {
@@ -107,3 +128,5 @@ variable "database_subnet_cidrs" {
     }
 
 }
+
+
