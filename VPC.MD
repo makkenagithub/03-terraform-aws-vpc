@@ -78,5 +78,25 @@ We cant create servers without subnet. So we have to create
 
 The procedure for creating a VPC is same for any project. Hence its better to create a terraform module for VPC and reuse it.
 
+VPC Peering:
+
+By default VPCs are not connecte each other.
+
+VPC peering can etablish connection between two VPCs. VPC CIDRs should be different, they should not overlap.
+
+If VPC 1 wants to connect to VPC 2. VPC 1 is called requester. VPC 2 is acceptor.
+
+VPCs can be peering even if they are from different AWS accounts and different regions.
+
+1. create 2 VPCs
+2. goto Peering, then create -> provide VPC 2 ID and its details such as same account or different accounts. Then create peering.
+3. Goto VPC 2 and accept the VPC peering request from VPC 1.
+
+Now 2 VPCs are connected. Then we need to add routes, which subnets needs to interact each other.
+
+We need to edit the routes. Goto VPC 1-> Route tables-> edit routes -> give th CIDR of other VPC 2-> choose peering connection, then its ID pcx-1345. 
+
+Similarly edit the routes of VPC 2 also, to get the response.
+
 
 

@@ -5,3 +5,7 @@ output "vpc_id" {
 output "az_info" {
     value = data.aws_availability_zones.avaibale
 }
+
+output "default_vpc_info" {
+    value = data.aws_vpc.default
+}
