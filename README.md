@@ -1,6 +1,8 @@
 # 03-terraform-aws-vpc
 # Terraform AWS VPC module customised
 
+![Capture](https://github.com/user-attachments/assets/21d7f2dc-a435-4a2b-ade9-f96fd524eb4e)
+
 This module s going to create the following resources, for HA we get fist two AZ in the region
 
 It creates folling resources
